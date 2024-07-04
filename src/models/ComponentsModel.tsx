@@ -36,3 +36,10 @@ export interface PanelItem {
 export interface TrustBarProps {
     images: string[];
 }
+export interface User {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+    phone: string;
+}
