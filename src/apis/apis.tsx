@@ -10,5 +10,5 @@ export const createItem = (body: object) => ({
     url: '/posts',
     method: 'post',
     baseURL: BASE_API_URL,
-    body: body,
+    body,
 });
