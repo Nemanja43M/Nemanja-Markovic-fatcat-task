@@ -31,13 +31,20 @@ const List: React.FC<ListProps> = ({ endpointObj, renderItem }) => {
     }, []);
 
     return (
-        <section>
+        <section className="section section-list-component flex justify-center items-center">
             {isLoading && !isError && <Loading />}
             {isError && <ErrorMessage />}
-            {data?.length > 0 &&
-                data?.map((item, index) => (
-                    <ListItem key={index} item={item} renderItem={renderItem} />
-                ))}
+            <div className="grid grid-cols-2 gap-4 mt-4">
+                {data?.length > 0 &&
+                    data?.map((item, index) => (
+                        <div
+                            key={index}
+                            className="item border border-gray-300 p-4 mb-4"
+                        >
+                            <ListItem item={item} renderItem={renderItem} />
+                        </div>
+                    ))}
+            </div>
         </section>
     );
 };

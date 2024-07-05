@@ -9,7 +9,7 @@ interface ListItemProps {
 
 const ListItem: React.FC<ListItemProps> = ({ item, renderItem }) => {
     return (
-        <div className="list">
+        <div>
             {renderItem ? (
                 renderItem(item)
             ) : (

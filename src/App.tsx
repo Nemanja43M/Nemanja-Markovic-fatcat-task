@@ -70,6 +70,7 @@ const App: React.FC = () => {
                     <>
                         <div>
                             <input
+                                className="form-input"
                                 type="text"
                                 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                                 {...register('title')}
@@ -79,13 +80,16 @@ const App: React.FC = () => {
                         </div>
                         <div>
                             <textarea
+                                className="textarea-input"
                                 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                                 {...register('body')}
                                 placeholder="Description"
                             ></textarea>
                             {/* {errors.body && errors.body.message} */}
                         </div>
-                        <button type="submit">Save</button>
+                        <button className="form-btn" type="submit">
+                            Save
+                        </button>
                     </>
                 )}
             />

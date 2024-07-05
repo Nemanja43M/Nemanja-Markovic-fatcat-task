@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react';
 
@@ -28,7 +29,7 @@ export const CreateForm = <T extends FieldValues>({
     getEndpointObj,
 }: CreateFormProps<T>): JSX.Element => {
     const { fetchData } = useFetchData();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const {
         register,
         handleSubmit,
@@ -46,8 +47,11 @@ export const CreateForm = <T extends FieldValues>({
     };
 
     return (
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-        <form onSubmit={handleSubmit(handleFormSubmit)}>
+        <form
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            onSubmit={handleSubmit(handleFormSubmit)}
+            className="section section-form-component flex flex-col justify-center items-center space-y-4"
+        >
             {renderForm && renderForm(register, errors)}
         </form>
     );
