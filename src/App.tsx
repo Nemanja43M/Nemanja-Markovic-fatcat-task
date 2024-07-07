@@ -1,24 +1,20 @@
 import React from 'react';
+
 import './styles.css';
+import { Field, ErrorMessage as FormikErrorMessage } from 'formik';
 
-import { z } from 'zod';
-
-import { createItem, userList } from './apis/apis';
-import { CreateForm } from './components/CreateForm';
+import { userList } from './apis/apis';
 import { CreatePage } from './components/CreatePage';
+import FormGenerator from './components/FormGenerator';
 import { Landing } from './components/landing/Landing';
 import List from './components/List';
 import { User } from './models/ComponentsModel';
-import image2 from '../public/media/cats/cat_2.png';
-import image3 from '../public/media/cats/cat_3.png';
-import image4 from '../public/media/cats/cat_4.png';
-import heroImage from '../public/media/cats/cat_5.png';
-import image1 from '../src/img/cats/cat_1.png';
-
-const schema = z.object({
-    title: z.string().min(2).max(20),
-    body: z.string().min(2).max(50),
-});
+import { Schema } from './models/ValidationSchema';
+import image1 from '../src/media/cats/cat_1.png';
+import image2 from '../src/media/cats/cat_2.png';
+import image3 from '../src/media/cats/cat_3.png';
+import image4 from '../src/media/cats/cat_4.png';
+import heroImage from '../src/media/cats/cat_5.png';
 
 const App: React.FC = () => {
     return (
@@ -33,7 +29,6 @@ const App: React.FC = () => {
                                 type: 'componentHero',
                                 props: {
                                     title: 'This is new hero section :D',
-                                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                                     image: heroImage,
                                 },
                             },
@@ -63,33 +58,33 @@ const App: React.FC = () => {
                     </div>
                 )}
             />
-            <CreateForm
-                validationSchema={schema}
-                getEndpointObj={createItem}
-                renderForm={(register) => (
+            <FormGenerator
+                validationSchema={Schema}
+                renderForm={() => (
                     <>
-                        <div>
-                            <input
-                                className="form-input"
-                                type="text"
-                                // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-                                {...register('title')}
-                                placeholder="Title"
-                            />
-                            {/* {errors.title && errors.title.message} */}
-                        </div>
-                        <div>
-                            <textarea
-                                className="textarea-input"
-                                // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-                                {...register('body')}
-                                placeholder="Description"
-                            ></textarea>
-                            {/* {errors.body && errors.body.message} */}
-                        </div>
-                        <button className="form-btn" type="submit">
-                            Save
-                        </button>
+                        <Field
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Title"
+                        />
+                        <FormikErrorMessage
+                            name="title"
+                            component="div"
+                            className="error-message"
+                        />
+
+                        <Field
+                            as="textarea"
+                            id="body"
+                            name="body"
+                            placeholder="Body"
+                        />
+                        <FormikErrorMessage
+                            name="body"
+                            component="div"
+                            className="error-message"
+                        />
                     </>
                 )}
             />

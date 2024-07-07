@@ -1,3 +1,7 @@
+// eslint-disable-next-line import/named
+import { FormikProps } from 'formik';
+import * as Yup from 'yup';
+
 export interface CardProps {
     title: string;
     text: string;
@@ -42,4 +46,46 @@ export interface User {
     username: string;
     email: string;
     phone: string;
+}
+
+interface ComponentProps {
+    type: string;
+    props: {
+        title?: string;
+        image?: string;
+        images?: string[];
+    };
+}
+export interface CreatePageProps {
+    pageLayout: {
+        type: string;
+        components?: ComponentProps[];
+        props: {
+            background: string;
+        };
+    }[];
+}
+export interface ListProps {
+    endpointObj: { url: string; method: string; baseURL: string };
+    renderItem: (item: User) => JSX.Element;
+}
+export interface ListItemProps {
+    item: User;
+    renderItem: (item: User) => JSX.Element;
+}
+export interface MyFormValues {
+    title: string;
+    body: string;
+}
+export interface FormActions {
+    setSubmitting: (isSubmitting: boolean) => void;
+    resetForm: () => void;
+}
+export interface FormGeneratorProps {
+    validationSchema: Yup.ObjectSchema<MyFormValues>;
+
+    renderForm: (
+        formikProps: FormikProps<MyFormValues>,
+        isFormSubmitted: boolean
+    ) => JSX.Element;
 }

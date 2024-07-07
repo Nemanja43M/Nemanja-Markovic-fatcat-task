@@ -23,8 +23,6 @@ const useFetchData = () => {
             const response: AxiosResponse<User[]> =
                 await axios.request(requestOptions);
             setData(response?.data);
-            // eslint-disable-next-line
-            console.log(response.data);
             setIsLoading(false);
         } catch (error) {
             setIsLoading(false);

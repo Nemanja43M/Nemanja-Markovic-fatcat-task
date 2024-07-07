@@ -4,12 +4,7 @@ import ErrorMessage from './ErrorMessage';
 import ListItem from './ListItem';
 import Loading from './Loading';
 import useFetchData from '../hooks/useFetchData';
-import { User } from '../models/ComponentsModel';
-
-interface ListProps {
-    endpointObj: { url: string; method: string; baseURL: string };
-    renderItem: (item: User) => JSX.Element;
-}
+import { ListProps } from '../models/ComponentsModel';
 
 const List: React.FC<ListProps> = ({ endpointObj, renderItem }) => {
     const { fetchData, data, isLoading, isError } = useFetchData();
@@ -20,21 +15,19 @@ const List: React.FC<ListProps> = ({ endpointObj, renderItem }) => {
                 try {
                     await fetchData(endpointObj);
                 } catch (error) {
-                    // eslint-disable-next-line
-                    console.log(error);
+                    error;
                 }
             }
         };
-
         void fetchDataAsync();
-        // eslint-disable-next-line
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <section className="section section-list-component flex justify-center items-center">
+        <section className="section section-list-component flex justify-center items-center min-h-screen">
             {isLoading && !isError && <Loading />}
             {isError && <ErrorMessage />}
-            <div className="grid grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mt-4">
                 {data?.length > 0 &&
                     data?.map((item, index) => (
                         <div

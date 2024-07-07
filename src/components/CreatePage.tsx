@@ -3,25 +3,7 @@ import React from 'react';
 import { Hero } from './Hero';
 import { Layout } from './Layout';
 import { TrustBar } from './TrustBar';
-
-interface ComponentProps {
-    type: string;
-    props: {
-        title?: string;
-        image?: string;
-        images?: string[];
-    };
-}
-
-interface CreatePageProps {
-    pageLayout: {
-        type: string;
-        components?: ComponentProps[];
-        props: {
-            background: string;
-        };
-    }[];
-}
+import { CreatePageProps } from '../../src/models/ComponentsModel';
 
 export const CreatePage: React.FC<CreatePageProps> = ({ pageLayout }) => {
     return (

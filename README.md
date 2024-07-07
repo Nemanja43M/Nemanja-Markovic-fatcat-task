@@ -1,144 +1,44 @@
-## Complete the following tasks
+## How to start project
 
-### Transfer the project to TypeScript
+In order to start the project, you must first do npm install and then the "npm run dev" command, which will be used to start the project on the local host, and clicking on the link will take you to the browser and open the started project.
 
-Your first task involves transitioning this project 
-from JavaScript to TypeScript. To ensure a robust 
-and type-safe codebase, please configure TypeScript
-with the following compiler options:
-* "noImplicitAny": true
-* "strict": true
-* "strictNullChecks": true
-* "noImplicitThis": true
+### Transfer the project to TypeScript Task 1
 
-Additionally, implement import aliases in your project
-configuration. Set up your imports to use the format
-***@homework-task/path/to/file.ts***.
+I have completed the transition from JavaScript to TypeScript with the following compiler options:
 
-In the ***src/components*** folder, you will find several
-components. Your goal is to enhance these components with
-appropriate TypeScript interfaces and types.
+-   "noImplicitAny": true
+-   "strict": true
+-   "strictNullChecks": true
+-   "noImplicitThis": true
 
-### Create a List Component
+### Create a List Component Task 2
 
-Develop a React component that is both scalable and reusable,
-designed to fetch and display data from an API in a list
-format. The specific API endpoint to be used is
-https://jsonplaceholder.typicode.com/users. For each item 
-in the list, ensure that the following keys are displayed:
-***id***, ***name***, ***email***, ***dateOfBirth***, and ***phone***.
+For this task, I've created a custom hook with Axios named useFetchData that encapsulates the logic for fetching data from the API endpoint (https://jsonplaceholder.typicode.com/users). This hook manages the fetching of user data from the API. It handles loading states, errors, and stores the fetched users in state. Then i created two components List and ListItem for using that hook and rendering data.
 
+### Create a Form Generator Component Task 3
 
-### Create a Form Generator Component
-
-1. Develop a scalable and reusable React component with the
-following capabilities:
-
-* **Validation Schema:** Accept a validation schema prop to ensure form data adheres to specified rules.
-* **API Hook Call:** Incorporate an API hook that handles states such as data, isLoading, and isError.
-* **Callback Function for Form Rendering:** Implement a callback function prop (renderForm) that renders the form elements and handles their state appropriately.
+-   **Validation Schema:** I used Formic for form and Yup for validation schema
+-   **API Hook Call:** Custom hook useFetchData that i made i used for this task also.
+-   **Callback Function for Form Rendering:** It implements the renderForm callback function prop that renders the form elements and manages their state appropriately. The renderForm function is passed as a prop to the FormGenerator component and used within the Formik component to render form fields (Field components for text input and textarea), and display error messages for each field. Additionally, the function takes formikProps and isFormSubmitted as arguments to manipulate the form state during submission.
 
 2. Component Implementation:
-* Utilize this component to create a form with two fields:
-  * Input Field (‘title’): A required field with a maximum character limit.
-  * Textarea Field (‘body’): Also a required field with a maximum character limit.
-* Both fields should display error messages if the input doesn't meet the criteria set by the validation schema.
-* For form submissions, use the POST method at https://jsonplaceholder.typicode.com/posts.
 
-Recommended libraries, but you can use whatever you prefer:
-* ***React Query:*** For handling API calls.
-* ***Zod:*** For defining the validation schema.
-* ***React Hook Form:*** For managing form state, submission, and logic.
+-   The constraints include a minimum length of 2 characters and a maximum of 20 characters, with all fields being required.
+-   During loading, a loader appears, and in case of errors, an error message is displayed. I made two components, one for displaying errors and one for loading indicators. Additionally, I implemented a POST method that sends data to an endpoint. If successful, a success message is shown; if there's an error, an error message is displayed.
 
-Alternatively, you're free to use any library or custom solution that aligns with the above requirements.
+### Create a Page Generator Component Task 4
 
-Component Example **(this does not have to be the exact implementation)**:
+Dynamic Layout Handling: The CreatePage component dynamically processes different layout types (sectionLayout) passed via props (pageLayout).
 
-```tsx
-<CreateForm<ICreateCycleFormInputs>
-    useMutation={useSomeMutation}
-    validationSchema={someSchema}
-    successMessage="Successfully created something"
-    renderForm={({ register, errors }) => (
-        <>
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="name"
-                label="Name"
-                error={!!errors.name}
-                helperText={errors.name?.message}
-                autoFocus
-                {...register('name')}
-            />
-        </>
-    )}
-/>
-```
+Scalability and Reusability: Designed for scalability, it efficiently accommodates future layout types by relying on the pageLayout prop, which defines each section's structure with components and specific props.
 
+Prop Structure:
 
-### Create a Page Generator Component
-Your task is to create a reusable React component for
-building web pages. This component should be designed 
-to handle a variety of page layouts and components 
-dynamically, based on the props it receives.
-* ***Dynamic Layout Handling:*** The component must handle different page layouts.
-* ***Scalability and Reusability:*** It should be easily scalable to accommodate future layout types and be reusable across different pages.
-* ***Prop Structure:*** The main prop is an array of objects, each representing a section of the page with its own layout and components.
-  * Each object in this array contains:
-    * type: identifying the layout type.
-    * components: an array of objects, each describing a component to be rendered in this section.
-    * props: properties specific to that layout (ex. background color)
-  * Each component object has:
-    * type: the type of the component (e.g., 'componentHero').
-    * props: properties specific to that component.
+PageLayout is the main prop, an array of objects.
+Each object represents a page section with its type (layout type), components array (list of components), and additional props specific to that layout.
+Each component within components has a type defining its type and props specific to that component.
 
-You can use the components provided in src/components. If you desire, you can 
-add your own components or change the existing ones.
+Implementation:
 
-Here is an example of the props that the component should accept:
-
-```ts
-const data = [
-    {
-        type: 'layoutSection',
-        props: { ...layoutProps},
-        components: [
-            {
-                type: 'componentHero',
-                props: {...componentProps},
-            },
-        ],
-    },
-    {
-        type: 'layoutSection',
-        props: { ...layoutProps},
-        components: [
-            {
-                type: 'componentItemsShowcase',
-                props: {...componentProps},
-            },
-            {
-                type: 'componentTrustBar',
-                props: {...componentProps},
-            },
-        ],
-    },
-];
-
-```
-
-### Additional Requirements
-You will have to complete all of these for your task to be considered done.
-
-* Follow the eslint and prettier rules set by the project; you must not use any ts-ignore or disable eslint.
-* It must contain a Readme.md file that has instructions on how to run the project as well as a brief explanation of how you have implemented these features. In the project, there is already a Readme.md file present feel free to override it completely.
-* Your code must follow the latest rules and conventions
-* You have to have checks for typescript and eslint that disallow you to commit any changes that cause errors.
-* There should be no TypeScript or Eslint errors in your code.
-* Feel free to add your own touch to these tasks
-* Keep in mind that you will have to expand upon this solution in the technical interview
-
-
-### Note: You can override this document
+Within CreatePage, iterate over pageLayout to render each section (sectionLayout) using the appropriate Layout.
+Iterate through the components of each section and render the corresponding component (Hero or TrustBar) based on its type, passing relevant props.

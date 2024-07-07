@@ -1,26 +1,15 @@
 import React from 'react';
 
-import { User } from '../models/ComponentsModel';
+import { ListItemProps } from '../models/ComponentsModel';
 
-interface ListItemProps {
-    item: User;
-    renderItem: (item: User) => JSX.Element;
-}
-
-const ListItem: React.FC<ListItemProps> = ({ item, renderItem }) => {
+const ListItem: React.FC<ListItemProps> = ({ item }) => {
     return (
-        <div>
-            {renderItem ? (
-                renderItem(item)
-            ) : (
-                <>
-                    <div>{item.id}</div>
-                    <div>{item.name}</div>
-                    <div>{item.username}</div>
-                    <div>{item.email}</div>
-                    <div>{item.phone}</div>
-                </>
-            )}
+        <div className="p-4">
+            <div>ID: {item.id}</div>
+            <div>Name: {item.name}</div>
+            <div>Username: {item.username}</div>
+            <div> {item.email}</div>
+            <div>Phone: {item.phone}</div>
         </div>
     );
 };
